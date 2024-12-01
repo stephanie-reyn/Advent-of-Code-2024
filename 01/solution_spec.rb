@@ -22,6 +22,25 @@ def part1(input)
  total_distance
 end
 
+def part2(input)
+  left = parse(input)
+  right = input.split("\n").map { |line| line.split.last.to_i }
+
+
+  # count how many times same number of right list
+  right_counts = Hash.new(0)
+  right.each { |num| right_counts[num] += 1}
+
+  # similary score
+  similary_score = 0
+  left.each do |num|
+    similary_score += num * right_counts[num]
+  end
+
+  similary_score
+end
+
+
 describe 'advent of code 2024, day 1' do
   it 'input can be parsed' do
     expect(parse("1\n2\n3\n")).to eq([1, 2, 3])
@@ -52,12 +71,12 @@ describe 'advent of code 2024, day 1' do
      puts '  ==========================================='
    end
 
-  skip 'part2 gives correct solution with test data' do
+  it 'part2 gives correct solution with test data' do
     expect(Object.private_method_defined?(:part2)).to be(true), 'define method part2 to get started'
     #
     # fill in the expected result for the test data here:
     #
-    expect(part2(test_input_filename)).to eq(1924)
+    expect(part2(File.binread(test_input_filename))).to eq(31)
 
     #
     # the run with real data will only start after test data works correctly

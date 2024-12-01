@@ -1,0 +1,8 @@
+.DS_Store
+tmp/**
+output/**
+public/**
+crash.log
+node_modules
+ruby_testexplorer.log
+.env
