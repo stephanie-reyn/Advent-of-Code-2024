@@ -1,0 +1,17 @@
+<% if @item.identifier=='/index.md' %>
+  <% sorted_articles.reverse.each do |article| %>
+    <article>
+      <h2>
+        <%= link_to article[:title], relative_path_to(article) %>
+      </h2>
+      <p>
+        <%= excerptize(strip_html(article.compiled_content), :length=>
+          50*4, :omission => '...')%>
+          <%= link_to 'full article' , relative_path_to(article) %>
+      </p>
+      <p>
+        <%= tags_for(article, base_url: 'concepts#') %>  
+      </p>
+    </article>
+  <% end %>
+<% end %>
